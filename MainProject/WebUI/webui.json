@@ -1,0 +1,819 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": []
+              },
+              {
+                "name": "Map",
+                "type": "pagev2-grid",
+                "slug": "map",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "supply_table",
+          "gridArea": "area-a",
+          "dndId": "area-asupply_table0"
+        },
+        {
+          "widgetUri": "input",
+          "gridArea": "area-a",
+          "dndId": "area-ainput1"
+        },
+        {
+          "widgetUri": "freight",
+          "gridArea": "area-a",
+          "dndId": "area-afreight2"
+        },
+        {
+          "widgetUri": "permitedLanes",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetspermitedLanes8"
+        },
+        {
+          "widgetUri": "import",
+          "gridArea": "area-b",
+          "dndId": "area-bimport3"
+        },
+        {
+          "widgetUri": "DoSolve",
+          "gridArea": "area-b",
+          "dndId": "area-bDoSolve4"
+        },
+        {
+          "widgetUri": "export",
+          "gridArea": "area-b",
+          "dndId": "area-bexport5"
+        },
+        {
+          "widgetUri": "xyz",
+          "gridArea": "area-b",
+          "dndId": "area-bxyz6"
+        },
+        {
+          "widgetUri": "variableResults",
+          "gridArea": "area-c",
+          "dndId": "area-cvariableResults7"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout2"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "xyz",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "DoSolve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "input",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "import",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "export",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "variableResults",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "supply_table",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "freight",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "permitedLanes",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "pages/map": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "map",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmap0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "map",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/DoSolve": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "DoSolve"
+    },
+    "title": {
+      "literal": "Otimizar"
+    }
+  },
+  "widgets/export": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_writeToExcel"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "export"
+    },
+    "title": {
+      "literal": "Exportar"
+    }
+  },
+  "widgets/freight": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_frete"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_destinos"
+        ],
+        "colHeader": [
+          "i_fontes"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Munich"
+          },
+          "width": 12.91
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Geneva"
+          },
+          "width": 12.7
+        },
+        {
+          "type": "rowHeader",
+          "width": 18.08
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_destination",
+          "width": 23.05
+        }
+      ]
+    },
+    "name": {
+      "literal": "freight"
+    },
+    "title": {
+      "literal": "Frete"
+    }
+  },
+  "widgets/import": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_readFromExcel"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "import"
+    },
+    "title": {
+      "literal": "Importar Dados"
+    }
+  },
+  "widgets/input": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_demanda",
+          "p_lucro"
+        ]
+      }
+    },
+    "name": {
+      "literal": "input"
+    },
+    "title": {
+      "literal": "Destino Info."
+    }
+  },
+  "widgets/map": {
+    "aimms.widget.type": {
+      "literal": "map-v2"
+    },
+    "arcs.__display_order__": {
+      "literal": [
+        "arcs.0"
+      ]
+    },
+    "arcs.0": {
+      "aimms": {
+        "contents": [
+          "v_fornecimento"
+        ],
+        "slices": [
+          {
+            "identifier": "v_fornecimento",
+            "slice": [
+              {
+                "index": "i_fontes",
+                "type": "free",
+                "value": "i_fontes"
+              },
+              {
+                "index": "i_destinos",
+                "type": "free",
+                "value": "i_destinos"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "arcs.0.value": {
+      "literal": {
+        "identifier": "v_fornecimento",
+        "slice": [
+          {
+            "index": "i_fontes",
+            "type": "free",
+            "value": "i_fontes"
+          },
+          {
+            "index": "i_destinos",
+            "type": "free",
+            "value": "i_destinos"
+          }
+        ]
+      }
+    },
+    "arcs.0.width.dynamic": {
+      "literal": true
+    },
+    "center.latitude": {
+      "literal": 45.59866568982064
+    },
+    "center.longitude": {
+      "literal": 14.194335937500002
+    },
+    "name": {
+      "literal": "map"
+    },
+    "nodes.__display_order__": {
+      "literal": [
+        "nodes.0",
+        "nodes.1"
+      ]
+    },
+    "nodes.0": {
+      "aimms": {
+        "contents": [
+          "p_fabricasLong",
+          "p_fabricasLat",
+          "p_fornecimento",
+          "sp_sourceIcon"
+        ],
+        "slices": [
+          {
+            "identifier": "p_fabricasLong",
+            "slice": [
+              {
+                "index": "i_fontes",
+                "type": "free",
+                "value": "i_fontes"
+              }
+            ]
+          },
+          {
+            "identifier": "p_fabricasLat",
+            "slice": [
+              {
+                "index": "i_fontes",
+                "type": "free",
+                "value": "i_fontes"
+              }
+            ]
+          },
+          {
+            "identifier": "p_fornecimento",
+            "slice": [
+              {
+                "index": "i_fontes",
+                "type": "free",
+                "value": "i_fontes"
+              }
+            ]
+          },
+          {
+            "identifier": "sp_sourceIcon",
+            "slice": [
+              {
+                "index": "i_fontes",
+                "type": "free",
+                "value": "i_fontes"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.0.icon": {
+      "literal": {
+        "identifier": "sp_sourceIcon",
+        "slice": [
+          {
+            "index": "i_fontes",
+            "type": "free",
+            "value": "i_fontes"
+          }
+        ]
+      }
+    },
+    "nodes.0.index": {
+      "literal": {
+        "identifier": "i_fontes"
+      }
+    },
+    "nodes.0.latitude": {
+      "literal": {
+        "identifier": "p_fabricasLat",
+        "slice": [
+          {
+            "index": "i_fontes",
+            "type": "free",
+            "value": "i_fontes"
+          }
+        ]
+      }
+    },
+    "nodes.0.longitude": {
+      "literal": {
+        "identifier": "p_fabricasLong",
+        "slice": [
+          {
+            "index": "i_fontes",
+            "type": "free",
+            "value": "i_fontes"
+          }
+        ]
+      }
+    },
+    "nodes.0.size": {
+      "literal": {
+        "identifier": "p_fornecimento",
+        "slice": [
+          {
+            "index": "i_fontes",
+            "type": "free",
+            "value": "i_fontes"
+          }
+        ]
+      }
+    },
+    "nodes.1": {
+      "aimms": {
+        "contents": [
+          "p_destinosLong",
+          "p_destinosLat",
+          "p_demanda",
+          "sp_destino"
+        ],
+        "slices": [
+          {
+            "identifier": "p_destinosLong",
+            "slice": [
+              {
+                "index": "i_destinos",
+                "type": "free",
+                "value": "i_destinos"
+              }
+            ]
+          },
+          {
+            "identifier": "p_destinosLat",
+            "slice": [
+              {
+                "index": "i_destinos",
+                "type": "free",
+                "value": "i_destinos"
+              }
+            ]
+          },
+          {
+            "identifier": "p_demanda",
+            "slice": [
+              {
+                "index": "i_destinos",
+                "type": "free",
+                "value": "i_destinos"
+              }
+            ]
+          },
+          {
+            "identifier": "sp_destino",
+            "slice": [
+              {
+                "index": "i_destinos",
+                "type": "free",
+                "value": "i_destinos"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.1.icon": {
+      "literal": {
+        "identifier": "sp_destino",
+        "slice": [
+          {
+            "index": "i_destinos",
+            "type": "free",
+            "value": "i_destinos"
+          }
+        ]
+      }
+    },
+    "nodes.1.index": {
+      "literal": {
+        "identifier": "i_destinos"
+      }
+    },
+    "nodes.1.latitude": {
+      "literal": {
+        "identifier": "p_destinosLat",
+        "slice": [
+          {
+            "index": "i_destinos",
+            "type": "free",
+            "value": "i_destinos"
+          }
+        ]
+      }
+    },
+    "nodes.1.longitude": {
+      "literal": {
+        "identifier": "p_destinosLong",
+        "slice": [
+          {
+            "index": "i_destinos",
+            "type": "free",
+            "value": "i_destinos"
+          }
+        ]
+      }
+    },
+    "nodes.1.size": {
+      "literal": {
+        "identifier": "p_demanda",
+        "slice": [
+          {
+            "index": "i_destinos",
+            "type": "free",
+            "value": "i_destinos"
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "Distribution"
+    },
+    "zoom": {
+      "literal": 5
+    }
+  },
+  "widgets/permitedLanes": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_caminhospermitidos"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_destinos"
+        ],
+        "colHeader": [
+          "i_fontes"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Geneva"
+          },
+          "width": 12.08
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Munich"
+          },
+          "width": 11.87
+        },
+        {
+          "type": "rowHeader",
+          "width": 17.14
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_destination",
+          "width": 24.08
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_fontes": "Geneva"
+          },
+          "width": 24.58
+        }
+      ]
+    },
+    "name": {
+      "literal": "permitedLanes"
+    },
+    "title": {
+      "literal": "Caminhos Permitidos"
+    }
+  },
+  "widgets/supply_table": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_fornecimento"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_fontes"
+        ],
+        "colHeader": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 19.52
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_source",
+          "width": 17.26
+        }
+      ]
+    },
+    "name": {
+      "literal": "supply_table"
+    },
+    "title": {
+      "literal": "Fontes Disponíveis"
+    }
+  },
+  "widgets/variableResults": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_fornecimento"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_destinos"
+        ],
+        "colHeader": [
+          "i_fontes"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_destination",
+          "width": 18.08
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Geneva"
+          },
+          "width": 11.9
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_source": "Munich"
+          },
+          "width": 12.29
+        }
+      ]
+    },
+    "name": {
+      "literal": "variableResults"
+    },
+    "title": {
+      "literal": "Resultados"
+    }
+  },
+  "widgets/xyz": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_TotalLiquido",
+          "v_FreteTotal",
+          "v_OBJFunction"
+        ]
+      }
+    },
+    "name": {
+      "literal": "xyz"
+    },
+    "title": {
+      "literal": "KPIs"
+    }
+  }
+}

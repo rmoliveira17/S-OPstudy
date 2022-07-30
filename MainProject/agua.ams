@@ -1,0 +1,159 @@
+## ams_version=1.0
+
+Model Main_BottledWater {
+	DeclarationSection LatLong {
+		StringParameter sp_destino {
+			IndexDomain: i_destinos;
+			Definition: "aimms-city";
+		}
+		Parameter p_destinosLong {
+			IndexDomain: i_destinos;
+		}
+		Parameter p_destinosLat {
+			IndexDomain: i_destinos;
+		}
+		Parameter p_fabricasLong {
+			IndexDomain: i_fontes;
+		}
+		Parameter p_fabricasLat {
+			IndexDomain: i_fontes;
+		}
+		StringParameter sp_sourceIcon {
+			IndexDomain: i_fontes;
+			Definition: "aimms-droplet";
+		}
+	}
+	DeclarationSection Problema_LP {
+		Set s_fabricas {
+			Index: i_fontes;
+		}
+		Set s_destinos {
+			Index: i_destinos;
+		}
+		Parameter p_demanda {
+			IndexDomain: i_destinos;
+		}
+		Parameter p_lucro {
+			IndexDomain: i_destinos;
+		}
+		Parameter p_fornecimento {
+			IndexDomain: i_fontes;
+		}
+		Parameter p_frete {
+			IndexDomain: (i_fontes,i_destinos);
+		}
+		Parameter p_caminhospermitidos {
+			IndexDomain: (i_fontes,i_destinos);
+			Range: binary;
+		}
+		Constraint c_fornecimentomaximo {
+			IndexDomain: i_destinos;
+			Definition: sum(i_fontes, v_fornecimento(i_fontes, i_destinos)) <= p_demanda(i_destinos);
+		}
+		Constraint c_disponibilidademaxima {
+			IndexDomain: i_fontes;
+			Definition: sum(i_destinos, v_fornecimento(i_fontes, i_destinos)) <= p_fornecimento(i_fontes);
+		}
+		Variable v_TotalLiquido {
+			Range: free;
+			Definition: sum((i_fontes, i_destinos), v_fornecimento(i_fontes, i_destinos) * p_lucro(i_destinos));
+		}
+		Variable v_FreteTotal {
+			Range: free;
+			Definition: {
+				sum((i_fontes, i_destinos), 
+				    v_fornecimento(i_fontes, i_destinos) 
+				    * p_frete(i_fontes, i_destinos))
+			}
+		}
+		Variable v_OBJFunction {
+			Range: free;
+			Definition: v_TotalLiquido - v_FreteTotal;
+		}
+		Variable v_fornecimento {
+			IndexDomain: (i_fontes,i_destinos) | p_caminhospermitidos(i_fontes,i_destinos);
+			Range: nonnegative;
+		}
+		MathematicalProgram mp_BW {
+			Objective: v_OBJFunction;
+			Direction: maximize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Type: Automatic;
+		}
+	}
+	Procedure pr_readFromExcel {
+		Body: {
+			dex::AddMapping(
+			    mappingName : "input_mapping",
+			    mappingFile : "./mappings/input_mapping.xml");
+			
+			dex::ReadFromFile(
+			    dataFile : "Data.xlsx",
+			    mappingName : "input_mapping");
+		}
+	}
+	Procedure pr_writeToExcel {
+		Body: {
+			dex::AddMapping(
+			    mappingName : "output_mapping",
+			    mappingFile : "./mappings/output_mapping.xml");
+			
+			dex::WriteToFile(
+			    dataFile : "Results.xlsx",
+			    mappingName : "output_mapping");
+		}
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			Solve mp_BW ;
+		}
+	}
+	Procedure PreMainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+<AimmsExcelMapping>
+    <SheetMapping name="Results">
+        <RowMapping name="destination">
+            <ColumnMapping name="source" binds-to="i_fontes"/>
+            <ColumnMapping name-binds-to="i_destinos" name-regex=".*" maps-to="v_fornecimento(i_fontes,i_destinos)" />
+        </RowMapping>
+    </SheetMapping>
+    <SheetMapping name="KPIs">
+        <ColumnMapping name="Total revenue" maps-to="v_TotalLiquido"/>
+        <ColumnMapping name="Total freight" maps-to="v_FreteTotal"/>
+        <ColumnMapping name="Objective function" maps-to="v_OBJFunction"/>
+    </SheetMapping>
+</AimmsExcelMapping>

@@ -1,0 +1,25 @@
+<AimmsExcelMapping>
+    <SheetMapping name="destination">
+        <RowMapping name="destination">
+            <ColumnMapping name="destination" binds-to="i_destinos"/>
+            <ColumnMapping name="demand" maps-to="p_demanda(i_destinos)"/>
+            <ColumnMapping name="revenue" maps-to="p_lucro(i_destinos)"/>
+            <ColumnMapping name="latitude" maps-to="p_destinosLat(i_destinos)"/>
+            <ColumnMapping name="longitude" maps-to="p_destinosLong(i_destinos)"/>
+        </RowMapping>
+    </SheetMapping>
+    <SheetMapping name="source">
+        <RowMapping name="source">
+            <ColumnMapping name="source" binds-to="i_fontes"/>
+            <ColumnMapping name="availability" maps-to="p_fornecimento(i_fontes)"/>
+            <ColumnMapping name="latitude" maps-to="p_fabricasLat(i_fontes)"/>
+            <ColumnMapping name="longitude" maps-to="p_fabricasLong(i_fontes)"/>
+        </RowMapping>
+    </SheetMapping>
+    <SheetMapping name="flow">
+        <RowMapping name="destination">
+            <ColumnMapping name="source" binds-to="i_fontes"/>
+            <ColumnMapping name-binds-to="i_destinos" name-regex=".*" maps-to="p_frete(i_fontes,i_destinos)" />
+        </RowMapping>
+    </SheetMapping>
+</AimmsExcelMapping>
